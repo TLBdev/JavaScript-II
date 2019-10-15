@@ -58,28 +58,48 @@ const runners = [
 // ==== Challenge 1: Use .forEach() ====
 // The event director needs both the first and last names of each runner for their running bibs. Combine both the first and last names and populate a new array called `fullNames`. This array will contain just strings.
 let fullNames = [];
-console.log(fullNames);
+// for (i in runners){
+//   fullNames.push(`${runners[i].last_name}, ${runners[i].first_name}`)
+// } 
+runners.forEach((e) => {
+  fullNames.push(`${e.last_name}, ${e.first_name}`)
+})
+// console.log(fullNames);
 
 // ==== Challenge 2: Use .map() ====
 // The event director needs to have all the runners' first names in uppercase because the director BECAME DRUNK WITH POWER. Populate an array called `firstNamesAllCaps`. This array will contain just strings.
-let firstNamesAllCaps = [];
-console.log(firstNamesAllCaps);
+let firstNamesAllCaps = runners.map(e => {return e.first_name.toUpperCase()})
+
+// console.log(firstNamesAllCaps);
 
 // ==== Challenge 3: Use .filter() ====
 // The large shirts won't be available for the event due to an ordering issue. We need a filtered version of the runners array, containing only those runners with large sized shirts so they can choose a different size. This will be an array of objects.
-let runnersLargeSizeShirt = [];
-console.log(runnersLargeSizeShirt);
+let runnersLargeSizeShirt = runners.filter(e => e.shirt_size === 'L')
+
+// console.log(runnersLargeSizeShirt);
 
 // ==== Challenge 4: Use .reduce() ====
 // The donations need to be tallied up and reported for tax purposes. Add up all the donations and save the total into a ticketPriceTotal variable.
-let ticketPriceTotal = 0;
+let priceArr = runners.map(e => {return e.donation})
+
+let ticketPriceTotal = priceArr.reduce((a,b) => a+b)
+
 console.log(ticketPriceTotal);
 
 // ==== Challenge 5: Be Creative ====
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
 // Problem 1
-
+// get a list of all big money donors so we know who to give the really fancy stuff to.
+let bigMoney = runners.filter(e => e.donation > 200)
+// console.log(bigMoney)
 // Problem 2
-
+//a large corp has given a 100$ donation to each runner what is the new total
+let macroHardDonation = runners.map(e => {return (e.donation + 100)}) 
+let macroHardMoney = macroHardDonation.reduce((a,b) => a+b)
+console.log(macroHardMoney)
 // Problem 3
+// yale.edu has been the target of a sustained DDoS attack and is offline indefinately create an array containing all runners with a yale.edu email address so we can update contacts.
+yaleRunners = runners.filter(e => e.email.split('@')[1] === 'yale.edu')
+console.log(yaleRunners)
+
