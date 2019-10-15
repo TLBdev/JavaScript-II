@@ -40,22 +40,31 @@ const items = ['Pencil', 'Notebook', 'yo-yo', 'Gum'];
 
 
 function getLength(arr, cb) {
+  cb(arr.length)
   // getLength passes the length of the array into the callback.
 }
 
 function last(arr, cb) {
+  cb(arr[arr.length - 1])
   // last passes the last item of the array into the callback.
 }
 
 function sumNums(x, y, cb) {
+  cb((x+y))
   // sumNums adds two numbers (x, y) and passes the result to the callback.
 }
 
 function multiplyNums(x, y, cb) {
+  cb((x*y))
   // multiplyNums multiplies two numbers and passes the result to the callback.
 }
 
 function contains(item, list, cb) {
+  let check = false
+  if (list.indexOf(item) > -1){
+    check = true
+  }
+  cb(check)
   // contains checks if an item is present inside of the given array/list.
   // Pass true to the callback if it is, otherwise pass false.
 }
@@ -63,7 +72,24 @@ function contains(item, list, cb) {
 /* STRETCH PROBLEM */
 
 function removeDuplicates(array, cb) {
+  let arr = []
+  let check = ''
+  for (let i = 0; i < array.length; i++){
+    check = array[i]
+    if (arr.indexOf(check) === -1){
+      arr.push(array[i])
+    }
+  }
+  cb(arr)
   // removeDuplicates removes all duplicate values from the given array.
   // Pass the duplicate free array to the callback function.
   // Do not mutate the original array.
 }
+let testArr = ['cat', 'cat', 'cat', 'dog', 'moose']
+function testcb(arg){
+  console.log(arg)
+}
+
+removeDuplicates(testArr, testcb)
+multiplyNums(5,6,testcb)
+contains('bat', testArr, testcb)
